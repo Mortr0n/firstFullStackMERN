@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import PersonForm from '../components/PersonForm';
+import PersonList from '../components/PersonList';
 
 
 const Main = () => {
@@ -14,11 +15,25 @@ const Main = () => {
     //         } )
     //         .catch((err) => console.log(err));
     // }, []);
+    const [people, setPeople] = useState([]);
+    const [loaded, setLoaded] = useState(false);
+
+    useEffect(() =>{
+        axios.get('http://localhost:8000/api/people')
+            .then(res=>{
+                console.log(res.data);
+                setPeople(res.data);
+                setLoaded(true);
+            });
+    }, [])
+
     return (
         <div>
             {/* below line was for react and server functionality testing */}
             {/* <h2>Message from the backend: {message} </h2> */}
             <PersonForm />
+            <hr/>
+            { loaded && <PersonList people={people}/> }
         </div>
     )
 }
