@@ -14,7 +14,7 @@ const PersonList = (props) => {
     }
 
 
-    return(
+    return( 
         <div>
             {props.people.map((person, index)=>{
                 return(
