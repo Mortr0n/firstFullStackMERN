@@ -34,7 +34,7 @@ module.exports = {
                 console.log(onePerson);
                 res.json(onePerson);
             })
-            .catch((err) => res.status(400).json({ errMessage: err }));
+            .catch((err) => res.status(400).json(err));
     },
 
     updatePerson: (req, res) => {

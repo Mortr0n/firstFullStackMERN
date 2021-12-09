@@ -3,7 +3,6 @@ import axios from 'axios';
 import PersonForm from '../components/PersonForm';
 import PersonList from '../components/PersonList';
 
-
 const Main = () => {
     // was for checking the react and server were working together properly
     // const [ message, setMessage ] = useState("Loading...")
@@ -27,13 +26,17 @@ const Main = () => {
             });
     }, [])
 
+    const removeFromDom = (personId) => {
+        setPeople(people.filter(person => person._id != personId));
+    }
+
     return (
         <div>
             {/* below line was for react and server functionality testing */}
             {/* <h2>Message from the backend: {message} </h2> */}
             <PersonForm />
             <hr/>
-            { loaded && <PersonList people={people}/> }
+            { loaded && <PersonList people={people} removeFromDom={removeFromDom} /> }
         </div>
     )
 }
