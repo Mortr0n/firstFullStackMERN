@@ -43,8 +43,8 @@ module.exports = {
             req.body,
             { new: true, runValidators: true },
         )
-            .then((updatedAnimal) => {
-                res.json(updatedAnimal)
+            .then((updatedPerson) => {
+                res.json(updatedPerson)
             })
             .catch((err) => res.status(400).json({ errMessage: err }));
     },
@@ -53,7 +53,5 @@ module.exports = {
         Person.findOneAndDelete({ _id: req.params.id })
             .then((personToDelete) => res.json(personToDelete))
             .catch((err) => res.status(400).json({ errMessage: err }));
-    }
-
-
+    },
 }

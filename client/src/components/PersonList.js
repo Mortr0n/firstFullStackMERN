@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from '@reach/router';
 import axios from 'axios';
+import DeleteButton from './DeleteButton';
 
 const PersonList = (props) => {
 
     const { removeFromDom, people } = props;
+
     const deletePerson = (personId) => {
         axios.delete(`http://localhost:8000/api/people/${personId}`)
             .then((res) => {
@@ -13,10 +15,9 @@ const PersonList = (props) => {
             .catch((err) => console.log(err));
     }
 
-
     return( 
         <div>
-            {props.people.map((person, index)=>{
+            {people.map((person, index)=>{
                 return(
                     <div className="personBox" key={index}>
                     <Link to={"/people/" + person._id} >
@@ -25,10 +26,10 @@ const PersonList = (props) => {
                     <Link to={"/people/" + person._id + "/edit"} >
                         <p >Edit</p>
                     </Link>
-                    <button onClick={(e) => {deletePerson(person._id)}}>Delete</button>
-            </div>
+                    <DeleteButton personId={person._id} successCallback={()=>removeFromDom(person._id)}/>
+                    
+                    </div>
                 ) 
-
             })}
         </div>
     )
